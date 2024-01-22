@@ -26,7 +26,7 @@ jobs:
         type: volume
     uses: git-checkout@v1
     with:
-      url: https://github.com/taldavidson/StyleGAN2d.git
+      url: https://github.com/taldavidson/styleGAN2d.git
 
   # 2. Get pretrained cat model
 
@@ -83,8 +83,9 @@ jobs:
           --result-dir=/outputs/generatedCatsPretrained
         ls "-aFlR" /outputs
       image: tensorflow/tensorflow:1.14.0-gpu-py3
-
-   4. Get pretrained car model
+      
+      
+  # 4. Get pretrained car model
 
   getPretrainedModelCars:
     resources:
@@ -102,8 +103,9 @@ jobs:
         - -P
         - /outputs/pretrainedNetwork
       image: alpine:latest
+      
+  # 5. Show generating images using pretrained car model
 
-  5. Show generating images using pretrained car model
   generateCarImagesPretrainedModel:
     resources:
       instance-type: P4000
@@ -125,7 +127,7 @@ jobs:
         pip install requests==2.22.0
         pip install Pillow==6.2.1
         cp -R /inputs/repo /stylegan2
-        cd /stylegan2
+        cd /stylegan2 
         python run_generator.py generate-images \
           --network=gdrive:networks/stylegan2-car-config-f.pkl \
           --seeds=6000-6025 \
